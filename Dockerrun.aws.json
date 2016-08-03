@@ -1,0 +1,53 @@
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "php-app",
+      "host": {
+        "sourcePath": "/Users/oswaldderiemaecker/PhpstormProjects/elasticbeanstalk-sample/php-app"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "php-apache",
+      "image": "php:7.0-apache",
+      "essential": true,
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "php-app",
+          "containerPath": "/var/www/html",
+          "readOnly": true
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ]
+    }
+  ],
+  "localContainerDefinitions": [
+    {
+      "name": "php-apache",
+      "image": "php:7.0-apache",
+      "essential": true,
+      "memory": 128,
+      "mountPoints": [
+        {
+          "sourceVolume": "php-app",
+          "containerPath": "/var/www/html",
+          "readOnly": true
+        }
+      ],
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ]
+    }
+  ]
+}

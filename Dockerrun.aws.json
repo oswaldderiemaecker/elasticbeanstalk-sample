@@ -4,14 +4,20 @@
     {
       "name": "php-app",
       "host": {
-        "sourcePath": "/var/app/current"
+        "sourcePath": "/var/app/current/php-app"
+      }
+    },
+    {
+      "name": "apache",
+      "host": {
+        "sourcePath": "/var/app/current/config"
       }
     }
   ],
   "containerDefinitions": [
     {
       "name": "php-apache",
-      "image": "php:7.0-apache",
+      "image": "maestrooo/eb-docker-php7",
       "essential": true,
       "memory": 128,
       "mountPoints": [
@@ -19,26 +25,10 @@
           "sourceVolume": "php-app",
           "containerPath": "/var/www/html",
           "readOnly": true
-        }
-      ],
-      "portMappings": [
+        },
         {
-          "hostPort": 80,
-          "containerPort": 80
-        }
-      ]
-    }
-  ],
-  "localContainerDefinitions": [
-    {
-      "name": "php-apache",
-      "image": "php:7.0-apache",
-      "essential": true,
-      "memory": 128,
-      "mountPoints": [
-        {
-          "sourceVolume": "php-app",
-          "containerPath": "/var/www/html",
+          "sourceVolume": "apache",
+          "containerPath": "/etc/apache2/sites-enabled",
           "readOnly": true
         }
       ],
